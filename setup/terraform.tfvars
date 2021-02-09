@@ -1,4 +1,4 @@
-#db_instance_identifier = var.db_instance_identifier
+db_instance_identifier = "example"
 
 db_instance_type       = "db.t2.micro"
 
