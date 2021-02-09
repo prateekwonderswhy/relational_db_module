@@ -3,7 +3,7 @@ terraform {
 }
 
 resource "aws_db_instance" "default" {
-  allocated_storage                     = 20
+  allocated_storage                     = var.allocated_storage
   storage_type                          = "gp2"
   identifier                            = var.db_instance_identifier
   engine                                = "mysql"

@@ -11,3 +11,5 @@ use_case               = "mysqldb"
 engine_version         = "5.7"
 
 max_allocated_storage  = 100
+
+allocated_storage      = 20

@@ -7,6 +7,7 @@ module "mysql_db" {
   source = "../modules/rds"
   db_instance_identifier = var.db_instance_identifier
   db_instance_type       = var.db_instance_type
+  allocated_storage      = var.allocated_storage
   db_username            = var.db_username
   db_password            = var.db_password
   use_case               = var.use_case

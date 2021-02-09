@@ -30,4 +30,7 @@ variable "engine_version" {
   type = string
 }
 
+variable "allocated_storage" {
+  type = number
+}
 

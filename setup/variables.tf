@@ -25,3 +25,7 @@ variable "max_allocated_storage" {
 variable "engine_version" {
   type = string
 }
+
+variable "allocated_storage" {
+  type = number
+}
