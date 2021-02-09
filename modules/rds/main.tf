@@ -10,6 +10,7 @@ resource "aws_db_instance" "default" {
   port                    = "3308"
   engine_version          = "5.7"
   performance_insights_enabled = true
+  copy_tags_to_snapshot = true
   skip_final_snapshot     = true
   instance_class          = var.db_instance_type
   name                    = var.use_case
