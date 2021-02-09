@@ -9,6 +9,7 @@ resource "aws_db_instance" "default" {
   engine                  = "mysql"
   port                    = "3308"
   engine_version          = "5.7"
+  performance_insights_enabled = true
   skip_final_snapshot     = true
   instance_class          = var.db_instance_type
   name                    = var.use_case
