@@ -8,7 +8,7 @@ resource "aws_db_instance" "default" {
   identifier                            = var.db_instance_identifier
   engine                                = "mysql"
   port                                  = "3308"
-  engine_version                        = "5.7"
+  engine_version                        = var.engine_version
   performance_insights_enabled          = true
   copy_tags_to_snapshot                 = true
   skip_final_snapshot                   = true
@@ -20,7 +20,7 @@ resource "aws_db_instance" "default" {
   name                                  = var.use_case
   username                              = var.db_username
   password                              = var.db_password
-  parameter_group_name                  = "default.mysql5.7"
+  parameter_group_name                  = "default.mysql${var.engine_version}"
   backup_retention_period               = 7
   monitoring_interval                   = 30
   monitoring_role_arn                   = var.role_arn

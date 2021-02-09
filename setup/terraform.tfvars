@@ -7,3 +7,5 @@ db_username            = "prateek"
 db_password            = "M0nDayPratilip!"
   
 use_case               = "mysqldb"
+
+engine_version         = "5.7"
