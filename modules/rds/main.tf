@@ -3,23 +3,27 @@ terraform {
 }
 
 resource "aws_db_instance" "default" {
-  allocated_storage       = 20
-  storage_type            = "gp2"
-  identifier              = var.db_instance_identifier
-  engine                  = "mysql"
-  port                    = "3308"
-  engine_version          = "5.7"
-  performance_insights_enabled = true
-  copy_tags_to_snapshot = true
-  skip_final_snapshot     = true
-  instance_class          = var.db_instance_type
-  name                    = var.use_case
-  username                = var.db_username
-  password                = var.db_password
-  parameter_group_name    = "default.mysql5.7"
-  backup_retention_period = 7
-  monitoring_interval = 30
-  monitoring_role_arn = var.role_arn
+  allocated_storage                     = 20
+  storage_type                          = "gp2"
+  identifier                            = var.db_instance_identifier
+  engine                                = "mysql"
+  port                                  = "3308"
+  engine_version                        = "5.7"
+  performance_insights_enabled          = true
+  copy_tags_to_snapshot                 = true
+  skip_final_snapshot                   = true
+  deletion_protection                   = true
+  storage_encrypted                     = true
+  maintenance_window                    = "Wed:04:00-Wed:05:00"
+  max_allocated_storage                 = var.max_allocated_storage
+  instance_class                        = var.db_instance_type
+  name                                  = var.use_case
+  username                              = var.db_username
+  password                              = var.db_password
+  parameter_group_name                  = "default.mysql5.7"
+  backup_retention_period               = 7
+  monitoring_interval                   = 30
+  monitoring_role_arn                   = var.role_arn
   tags = {
     "Name" = var.use_case
   }

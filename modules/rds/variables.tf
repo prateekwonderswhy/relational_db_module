@@ -22,5 +22,9 @@ variable "role_arn" {
   
 }
 
+variable "max_allocated_storage" {
+  type = number
+}
+
 
 

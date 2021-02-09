@@ -11,4 +11,5 @@ module "mysql_db" {
   db_password            = var.db_password
   use_case               = var.use_case
   role_arn               = module.mysql_db.role_arn
+  max_allocated_storage  = var.max_allocated_storage
 }

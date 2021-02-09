@@ -18,3 +18,6 @@ variable "use_case" {
     type = string
 }
 
+variable "max_allocated_storage" {
+  type = number
+}
