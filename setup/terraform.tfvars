@@ -13,3 +13,5 @@ engine_version         = "5.7"
 max_allocated_storage  = 100
 
 allocated_storage      = 20
+
+monitoring_interval    = 30

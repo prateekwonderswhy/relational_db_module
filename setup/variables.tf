@@ -29,3 +29,16 @@ variable "engine_version" {
 variable "allocated_storage" {
   type = number
 }
+
+variable "monitoring_interval" {
+  type = number
+  default = 0
+}
+
+variable "vpc_cidr_block" {
+  type = string
+}
+
+variable "subnet_cidr_block" {
+  type = string
+}

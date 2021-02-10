@@ -2,6 +2,8 @@ terraform {
   required_version = ">= 0.13"
 }
 
+## RDS database configurations
+
 resource "aws_db_instance" "default" {
   allocated_storage                     = var.allocated_storage
   storage_type                          = "gp2"
@@ -22,12 +24,15 @@ resource "aws_db_instance" "default" {
   password                              = var.db_password
   parameter_group_name                  = "default.mysql${var.engine_version}"
   backup_retention_period               = 7
-  monitoring_interval                   = 30
+  monitoring_interval                   = var.monitoring_interval
   monitoring_role_arn                   = var.role_arn
   tags = {
     "Name" = var.use_case
   }
 }
+
+
+## IAM policy, role and policy attachment config for RDS
 
 resource "aws_iam_role" "rds_enhanced_monitoring" {
   name_prefix        = "rds-enhanced-monitoring-"
@@ -55,4 +60,66 @@ data "aws_iam_policy_document" "rds_enhanced_monitoring" {
       identifiers = ["monitoring.rds.amazonaws.com"]
     }
   }
+}
+
+
+
+## Database Security Group Configurations
+
+locals {
+  ingress_rules = [{
+    port           = 3308
+    description    = "Port 3308"
+  },
+  {
+    port           = 8080
+    description    = "Port 8080"
+  }
+  ]
+
+  egress_rules  = [{
+    port           = 3308
+    description    = "Port 3306"
+  },
+  {
+    port           = 6379
+    description    = "Port 6379"
+  }
+  ]
+
+}
+
+
+
+resource "aws_security_group" "PratilipiSG" {
+  name        = "${var.use_case}-sg"
+  vpc_id      = var.vpc_id
+
+
+  dynamic "ingress" {
+    for_each = local.ingress_rules
+
+    content {
+      description = ingress.value.description
+      from_port   = ingress.value.port
+      to_port     = ingress.value.port
+      protocol    = "tcp"
+      cidr_blocks  = ["0.0.0.0/0"]
+    }
+
+  }
+
+  dynamic "egress" {
+    for_each = local.egress_rules
+
+    content {
+      description = egress.value.description
+      from_port   = egress.value.port
+      to_port     = egress.value.port
+      protocol    = "tcp"
+      cidr_blocks  = ["0.0.0.0/0"]
+    }
+
+  }
+
 }

@@ -34,3 +34,11 @@ variable "allocated_storage" {
   type = number
 }
 
+variable "monitoring_interval" {
+  type = number
+}
+
+variable "vpc_id" {
+  type = string
+}
+
